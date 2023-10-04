@@ -8,7 +8,6 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const appConfig: AppConfig = configService.get('APP');
 
-  app.setGlobalPrefix(appConfig.API_PREFIX, { exclude: ['./'] });
   await app.listen(appConfig.APP_PORT);
 }
 bootstrap();
