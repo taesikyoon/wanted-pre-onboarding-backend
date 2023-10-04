@@ -9,7 +9,7 @@ export class JobPosting extends BaseEntity {
   position: string;
 
   @Column()
-  compensation: string;
+  compensation: number;
 
   @Column()
   description: string;
