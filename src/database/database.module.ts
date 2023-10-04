@@ -19,6 +19,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           logging: databaseConfig.LOGGING,
           synchronize: databaseConfig.SYNCHRONIZE,
           charset: 'utf8mb4',
+          // migrations: ['src/seeds/*.ts'],
         };
       },
       inject: [ConfigService],
