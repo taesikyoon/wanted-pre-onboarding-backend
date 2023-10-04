@@ -4,10 +4,11 @@ import { JobPostingController } from './job-posting.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JobPosting } from './models/job-posting.entity';
 import { ApplicationHistory } from './models/application-history.entity';
+import { JobPostingDAO } from './models/jop-postring.dao';
 
 @Module({
   imports: [TypeOrmModule.forFeature([JobPosting, ApplicationHistory])],
   controllers: [JobPostingController],
-  providers: [JobPostingService],
+  providers: [JobPostingService, JobPostingDAO],
 })
 export class JobPostingModule {}
