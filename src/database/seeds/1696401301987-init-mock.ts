@@ -51,7 +51,7 @@ const jobPostingSeeds = [
     description: '백엔드 주니어를 채용합니다! 환영해요 NestJS 사용하는 개발자',
     technicalStack: 'NestJS',
     companyId: 1,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 1000),
     updatedAt: new Date(),
   },
   {
@@ -61,7 +61,7 @@ const jobPostingSeeds = [
     description: '장고 백엔드 개발자 환영합니다!',
     technicalStack: 'Django',
     companyId: 2,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 2000),
     updatedAt: new Date(),
   },
   {
@@ -71,7 +71,7 @@ const jobPostingSeeds = [
     description: '프론트 개발자 환영해요! 뼈를 묻어요!',
     technicalStack: 'NextJS',
     companyId: 3,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 3000),
     updatedAt: new Date(),
   },
   {
@@ -81,7 +81,7 @@ const jobPostingSeeds = [
     description: '백엔드 주니어를 채용합니다! 환영해요 NestJS 사용하는 개발자',
     technicalStack: 'NestJS',
     companyId: 4,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 4000),
     updatedAt: new Date(),
   },
   {
@@ -91,7 +91,7 @@ const jobPostingSeeds = [
     description: 'Vue 개발자 채용! 돈 많이 줍니다!',
     technicalStack: 'Vue',
     companyId: 5,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 5000),
     updatedAt: new Date(),
   },
   {
@@ -101,7 +101,7 @@ const jobPostingSeeds = [
     description: '백엔드 주니어를 채용합니다! 환영해요 NestJS 사용하는 개발자',
     technicalStack: 'NestJS',
     companyId: 1,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 6000),
     updatedAt: new Date(),
   },
   {
@@ -111,7 +111,7 @@ const jobPostingSeeds = [
     description: '장고 백엔드 개발자 환영합니다!',
     technicalStack: 'Django',
     companyId: 2,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 7000),
     updatedAt: new Date(),
   },
   {
@@ -121,7 +121,7 @@ const jobPostingSeeds = [
     description: '프론트 개발자 환영해요! 뼈를 묻어요!',
     technicalStack: 'NextJS',
     companyId: 3,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 8000),
     updatedAt: new Date(),
   },
   {
@@ -131,7 +131,7 @@ const jobPostingSeeds = [
     description: '백엔드 주니어를 채용합니다! 환영해요 NestJS 사용하는 개발자',
     technicalStack: 'NestJS',
     companyId: 4,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 9000),
     updatedAt: new Date(),
   },
   {
@@ -141,7 +141,7 @@ const jobPostingSeeds = [
     description: 'Vue 개발자 채용! 돈 많이 줍니다!',
     technicalStack: 'Vue',
     companyId: 5,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 10000),
     updatedAt: new Date(),
   },
   {
@@ -151,7 +151,7 @@ const jobPostingSeeds = [
     description: '백엔드 주니어를 채용합니다! 환영해요 NestJS 사용하는 개발자',
     technicalStack: 'NestJS',
     companyId: 1,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 11000),
     updatedAt: new Date(),
   },
   {
@@ -161,7 +161,7 @@ const jobPostingSeeds = [
     description: '장고 백엔드 개발자 환영합니다!',
     technicalStack: 'Django',
     companyId: 2,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 12000),
     updatedAt: new Date(),
   },
   {
@@ -171,7 +171,7 @@ const jobPostingSeeds = [
     description: '프론트 개발자 환영해요! 뼈를 묻어요!',
     technicalStack: 'NextJS',
     companyId: 3,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 13000),
     updatedAt: new Date(),
   },
   {
@@ -181,7 +181,7 @@ const jobPostingSeeds = [
     description: '백엔드 주니어를 채용합니다! 환영해요 NestJS 사용하는 개발자',
     technicalStack: 'NestJS',
     companyId: 4,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 14000),
     updatedAt: new Date(),
   },
   {
@@ -191,7 +191,7 @@ const jobPostingSeeds = [
     description: 'Vue 개발자 채용! 돈 많이 줍니다!',
     technicalStack: 'Vue',
     companyId: 5,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 15000),
     updatedAt: new Date(),
   },
   {
@@ -201,7 +201,7 @@ const jobPostingSeeds = [
     description: '백엔드 주니어를 채용합니다! 환영해요 NestJS 사용하는 개발자',
     technicalStack: 'NestJS',
     companyId: 1,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 16000),
     updatedAt: new Date(),
   },
   {
@@ -211,7 +211,7 @@ const jobPostingSeeds = [
     description: '장고 백엔드 개발자 환영합니다!',
     technicalStack: 'Django',
     companyId: 2,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 17000),
     updatedAt: new Date(),
   },
   {
@@ -221,7 +221,7 @@ const jobPostingSeeds = [
     description: '프론트 개발자 환영해요! 뼈를 묻어요!',
     technicalStack: 'NextJS',
     companyId: 3,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 18000),
     updatedAt: new Date(),
   },
   {
@@ -231,7 +231,7 @@ const jobPostingSeeds = [
     description: '백엔드 주니어를 채용합니다! 환영해요 NestJS 사용하는 개발자',
     technicalStack: 'NestJS',
     companyId: 4,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 19000),
     updatedAt: new Date(),
   },
   {
@@ -241,7 +241,7 @@ const jobPostingSeeds = [
     description: 'Vue 개발자 채용! 돈 많이 줍니다!',
     technicalStack: 'Vue',
     companyId: 5,
-    createdAt: new Date(),
+    createdAt: new Date(Date.now() + 20000),
     updatedAt: new Date(),
   },
 ];
