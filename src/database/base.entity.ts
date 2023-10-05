@@ -5,14 +5,14 @@ export class BaseEntity {
   @PrimaryGeneratedColumn({ type: 'bigint', unsigned: true })
   id: number;
 
-  @CreateDateColumn({ name: 'create-at', select: false })
+  @CreateDateColumn({ name: 'created_at', select: false })
   createdAt!: Date;
 
-  @UpdateDateColumn({ name: 'updated-at', select: false })
+  @UpdateDateColumn({ name: 'updated_at', select: false })
   updatedAt!: Date;
 }
 
 export class SoftDeleteEntity extends BaseEntity {
-  @DeleteDateColumn({ name: 'deleted-at', select: false })
+  @DeleteDateColumn({ name: 'deleted_at', select: false })
   deletedAt?: Date | null;
 }
