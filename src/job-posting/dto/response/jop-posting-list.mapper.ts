@@ -11,6 +11,9 @@ export class JobPostingMapper {
   @Expose()
   technicalStack: string;
 
+  @Expose()
+  compensation: number;
+
   @Exclude()
   private company: Company;
 

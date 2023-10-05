@@ -27,10 +27,3 @@ export class JobPosting extends BaseEntity {
   @OneToMany(type => ApplicationHistory, applicationHistory => applicationHistory.jobPosting, { cascade: true })
   applicationHistory: ApplicationHistory;
 }
-
-// 회사 - 이름, 국가, 지역
-// 채용 공고 - 포지션, 포상금, 내용, 기술스택
-// 유저 - 이메일
-
-// 관계 설정
-// 하나의 회사는 여러개의 채용 공고를 등록 가능 M-N
