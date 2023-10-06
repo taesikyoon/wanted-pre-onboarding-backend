@@ -18,6 +18,11 @@ export class JobPostingMapper {
   private company: Company;
 
   @Expose()
+  get companyId(): number {
+    return this.company.id;
+  }
+
+  @Expose()
   get companyName(): string {
     return this.company.name;
   }

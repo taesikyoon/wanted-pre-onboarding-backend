@@ -11,7 +11,11 @@ export class JobPostingDAO {
   constructor(@InjectRepository(JobPosting) private readonly jobPostingRepository: Repository<JobPosting>) {}
 
   async create(jobPosting: CreateJobPostingDTO) {
-    await this.jobPostingRepository.insert({ ...jobPosting });
+    try {
+      await this.jobPostingRepository.insert({ ...jobPosting });
+    } catch {
+      throw new BadRequestException('채용공고 등록에 실패했습니다.');
+    }
   }
 
   async findMany(findManyOptions: FindManyJobPostingDTO) {
@@ -19,7 +23,16 @@ export class JobPostingDAO {
     const take = findManyOptions.items;
     const jopPostingList = await this.jobPostingRepository
       .createQueryBuilder('JB')
-      .select(['JB.id', 'JB.position', 'JB.technicalStack', 'JB.compensation', 'C.name', 'C.country', 'C.region'])
+      .select([
+        'JB.id',
+        'JB.position',
+        'JB.technicalStack',
+        'JB.compensation',
+        'C.id',
+        'C.name',
+        'C.country',
+        'C.region',
+      ])
       .innerJoin('JB.company', 'C', 'JB.companyId = C.id')
       .orderBy('JB.createdAt', findManyOptions.sort)
       .offset(skip)
@@ -51,5 +64,17 @@ export class JobPostingDAO {
     } catch {
       throw new BadRequestException('존재하지 않는 채용공고 입니다.');
     }
+  }
+
+  async findManyByCompanyId(companyId: number, excludedJobId: number) {
+    const queryBuilder = this.jobPostingRepository.createQueryBuilder('JB');
+
+    if (excludedJobId) queryBuilder.select(['JB.id']);
+
+    queryBuilder.where('JB.companyId = :companyId', { companyId });
+
+    if (excludedJobId) queryBuilder.andWhere('JB.id <> :excludedJobId', { excludedJobId });
+
+    return await queryBuilder.getMany();
   }
 }

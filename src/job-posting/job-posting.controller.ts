@@ -47,7 +47,13 @@ export class JobPostingController {
 
     return { success: true, message: '채용공고를 정상적으로 수정했습니다.', data };
   }
+
+  @Get('/:id')
+  async getOne(@Param('id', ParseIntPipe) jopPostingId: number) {
+    const data = await this.jobPostingService.getOne(jopPostingId);
+
+    return { success: true, message: '채용공고 상세조회에 성공했습니다.', data };
+  }
   async delete() {}
-  async getOne() {}
   async search() {}
 }

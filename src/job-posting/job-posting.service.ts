@@ -5,6 +5,7 @@ import { FindManyJobPostingDTO } from './dto/request/find-many-job-posting.dto';
 import { UpdateJobPostingDTO } from './dto/request/update-job-posting.dto';
 import { JobPostingMapper } from './dto/response/jop-posting-list.mapper';
 import { UpdatedJobPostingMapper } from './dto/response/updated-job-posting.mapper';
+import { GetOneJobPostingMapper } from './dto/response/get-one-jop-posting.mapper';
 
 @Injectable()
 export class JobPostingService {
@@ -27,5 +28,15 @@ export class JobPostingService {
 
     const updatedJobPosting = await this.jobPostingDAO.getOne(jopPostingId);
     return new UpdatedJobPostingMapper(updatedJobPosting);
+  }
+
+  async getOne(jobPostingId: number) {
+    const jobPosting = await this.jobPostingDAO.getOne(jobPostingId);
+
+    const otherJobPostings = (await this.jobPostingDAO.findManyByCompanyId(jobPosting.companyId, jobPosting.id)).map(
+      item => item.id,
+    );
+
+    return new GetOneJobPostingMapper({ ...jobPosting, otherJobPostings });
   }
 }

@@ -1,6 +1,6 @@
 import { Expose } from 'class-transformer';
 
-export class UpdatedJobPostingMapper {
+export class GetOneJobPostingMapper {
   @Expose()
   id: number;
 
@@ -11,10 +11,16 @@ export class UpdatedJobPostingMapper {
   technicalStack: string;
 
   @Expose()
+  compensation: number;
+
+  @Expose()
   description: string;
 
   @Expose()
   companyId: number;
+
+  @Expose()
+  otherJobPostings: number[];
 
   constructor(data: any) {
     Object.assign(this, data);
