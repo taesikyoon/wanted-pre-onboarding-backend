@@ -2,6 +2,7 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -22,11 +23,12 @@ export class JobPostingController {
 
   @Post('/')
   async create(@Body() jobPosting: CreateJobPostingDTO) {
-    await this.jobPostingService.create(jobPosting);
+    const data = await this.jobPostingService.create(jobPosting);
 
     return {
       success: true,
       message: '채용공고 등록에 성공하셨습니다.',
+      data: { id: data, ...jobPosting },
     };
   }
 
@@ -54,6 +56,16 @@ export class JobPostingController {
 
     return { success: true, message: '채용공고 상세조회에 성공했습니다.', data };
   }
-  async delete() {}
-  async search() {}
+
+  @Delete('/:id')
+  async delete(@Param('id', ParseIntPipe) jopPostingId: number) {
+    await this.jobPostingService.delete(jopPostingId);
+
+    return { success: true, message: '채용공고를 정상적으로 삭제했습니다.' };
+  }
+
+  @Post('/search')
+  async search(@Query('keyword') keyword: string) {
+    return await this.jobPostingService.search(keyword);
+  }
 }

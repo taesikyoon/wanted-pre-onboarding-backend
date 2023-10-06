@@ -12,7 +12,7 @@ export class JobPostingService {
   constructor(private readonly jobPostingDAO: JobPostingDAO) {}
 
   async create(jobPosting: CreateJobPostingDTO) {
-    await this.jobPostingDAO.create(jobPosting);
+    return await this.jobPostingDAO.create(jobPosting);
   }
 
   async findMany(findManyOptions: FindManyJobPostingDTO) {
@@ -27,6 +27,7 @@ export class JobPostingService {
     if (!isUpdated) throw new BadRequestException('채용공고 업데이트에 실패했습니다.');
 
     const updatedJobPosting = await this.jobPostingDAO.getOne(jopPostingId);
+
     return new UpdatedJobPostingMapper(updatedJobPosting);
   }
 
@@ -38,5 +39,17 @@ export class JobPostingService {
     );
 
     return new GetOneJobPostingMapper({ ...jobPosting, otherJobPostings });
+  }
+
+  async delete(jopPostingId: number) {
+    await this.jobPostingDAO.getOne(jopPostingId);
+    const isDeleted = await this.jobPostingDAO.delete(jopPostingId);
+
+    if (!isDeleted) throw new BadRequestException('채용공고 삭제에 실패했습니다.');
+  }
+
+  async search(keyword: string) {
+    const searchedList = await this.jobPostingDAO.search(keyword);
+    return searchedList.map(item => new JobPostingMapper(item));
   }
 }

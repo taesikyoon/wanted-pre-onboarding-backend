@@ -1,18 +1,29 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { JobPosting } from './job-posting.entity';
-import { Repository } from 'typeorm';
+import { Repository, SelectQueryBuilder } from 'typeorm';
 import { CreateJobPostingDTO } from '../dto/request/create-job-posting.dto';
 import { FindManyJobPostingDTO } from '../dto/request/find-many-job-posting.dto';
-import { JobPostingMapper } from '../dto/response/jop-posting-list.mapper';
 import { UpdateJobPostingDTO } from '../dto/request/update-job-posting.dto';
 import { BadRequestException } from '@nestjs/common';
 
 export class JobPostingDAO {
-  constructor(@InjectRepository(JobPosting) private readonly jobPostingRepository: Repository<JobPosting>) {}
+  private readonly jobPostingsSelect: string[];
+  constructor(@InjectRepository(JobPosting) private readonly jobPostingRepository: Repository<JobPosting>) {
+    this.jobPostingsSelect = [
+      'JB.id',
+      'JB.position',
+      'JB.technicalStack',
+      'JB.compensation',
+      'C.id',
+      'C.name',
+      'C.country',
+      'C.region',
+    ];
+  }
 
   async create(jobPosting: CreateJobPostingDTO) {
     try {
-      await this.jobPostingRepository.insert({ ...jobPosting });
+      return (await this.jobPostingRepository.insert({ ...jobPosting })).identifiers[0].id;
     } catch {
       throw new BadRequestException('채용공고 등록에 실패했습니다.');
     }
@@ -23,16 +34,7 @@ export class JobPostingDAO {
     const take = findManyOptions.items;
     const jopPostingList = await this.jobPostingRepository
       .createQueryBuilder('JB')
-      .select([
-        'JB.id',
-        'JB.position',
-        'JB.technicalStack',
-        'JB.compensation',
-        'C.id',
-        'C.name',
-        'C.country',
-        'C.region',
-      ])
+      .select(this.jobPostingsSelect)
       .innerJoin('JB.company', 'C', 'JB.companyId = C.id')
       .orderBy('JB.createdAt', findManyOptions.sort)
       .offset(skip)
@@ -76,5 +78,33 @@ export class JobPostingDAO {
     if (excludedJobId) queryBuilder.andWhere('JB.id <> :excludedJobId', { excludedJobId });
 
     return await queryBuilder.getMany();
+  }
+
+  async delete(id: number) {
+    const deletedJobPosting = await this.jobPostingRepository
+      .createQueryBuilder()
+      .delete()
+      .where('id = :id', { id })
+      .execute();
+
+    return deletedJobPosting.affected;
+  }
+
+  async search(keyword: string) {
+    console.log(keyword);
+    keyword = '원티드';
+    return await this.jobPostingRepository
+      .createQueryBuilder('JB')
+      .select(this.jobPostingsSelect)
+      .leftJoin('JB.company', 'C')
+      .where((qb: SelectQueryBuilder<JobPosting>) => {
+        qb.where('C.region = :keyword', { keyword })
+          .orWhere('JB.position LIKE :likeKeyword', { likeKeyword: `%${keyword}%` })
+          .orWhere('JB.description LIKE :likeKeyword', { likeKeyword: `%${keyword}%` })
+          .orWhere('JB.technicalStack LIKE :likeKeyword', { likeKeyword: `%${keyword}%` })
+          .orWhere('C.country LIKE :likeKeyword', { likeKeyword: `%${keyword}%` })
+          .orWhere('C.name LIKE :likeKeyword', { likeKeyword: `%${keyword}%` });
+      })
+      .getMany();
   }
 }
