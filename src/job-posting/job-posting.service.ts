@@ -6,10 +6,14 @@ import { UpdateJobPostingDTO } from './dto/request/update-job-posting.dto';
 import { JobPostingMapper } from './dto/response/jop-posting-list.mapper';
 import { UpdatedJobPostingMapper } from './dto/response/updated-job-posting.mapper';
 import { GetOneJobPostingMapper } from './dto/response/get-one-jop-posting.mapper';
+import { ApplicationHistoryDAO } from './models/application-history.dao';
 
 @Injectable()
 export class JobPostingService {
-  constructor(private readonly jobPostingDAO: JobPostingDAO) {}
+  constructor(
+    private readonly jobPostingDAO: JobPostingDAO,
+    private readonly applicationHistoryDAO: ApplicationHistoryDAO,
+  ) {}
 
   async create(jobPosting: CreateJobPostingDTO) {
     return await this.jobPostingDAO.create(jobPosting);
@@ -51,5 +55,13 @@ export class JobPostingService {
   async search(keyword: string) {
     const searchedList = await this.jobPostingDAO.search(keyword);
     return searchedList.map(item => new JobPostingMapper(item));
+  }
+
+  async apply(jobPostingId: number, userId: number) {
+    const isExist = await this.applicationHistoryDAO.findOne(jobPostingId, userId);
+
+    if (isExist) throw new BadRequestException('이미 지원한 채용공고입니다.');
+
+    return await this.applicationHistoryDAO.apply(jobPostingId, userId);
   }
 }

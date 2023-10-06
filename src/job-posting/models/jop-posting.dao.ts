@@ -91,8 +91,6 @@ export class JobPostingDAO {
   }
 
   async search(keyword: string) {
-    console.log(keyword);
-    keyword = '원티드';
     return await this.jobPostingRepository
       .createQueryBuilder('JB')
       .select(this.jobPostingsSelect)

@@ -66,6 +66,16 @@ export class JobPostingController {
 
   @Post('/search')
   async search(@Query('keyword') keyword: string) {
-    return await this.jobPostingService.search(keyword);
+    const data = await this.jobPostingService.search(keyword);
+
+    return { success: true, message: '키워드로 채용공고 리스트를 조회했습니다.', data };
+  }
+
+  @Post(':id/apply')
+  async apply(@Param('id', ParseIntPipe) jobPostingId: number, @Body('userId', ParseIntPipe) userId: number) {
+    // 유저 정보는 토큰으로 받을 수 있으나 임의로 진행하여 Body에 받고 진행
+    const data = await this.jobPostingService.apply(jobPostingId, userId);
+
+    return { success: true, message: '채용공고에 지원에 성공했습니다.', data };
   }
 }
