@@ -25,6 +25,9 @@ sh start.sh
 - 쉘 실행 내용 요약
 
 ```
+1. 데이터베이스 테이블을 생성합니다.
+2. 각 테이블에 테스트를 위한 seed data를 삽입합니다.
+3. NestJS Server를 실행시킵니다.
 
 ```
 
@@ -39,9 +42,7 @@ sh start.sh
 - 쉘 실행 내용 요약
 
 ```
-1. 데이터베이스 테이블을 생성합니다.
-2. 각 테이블에 테스트를 위한 seed data를 삽입합니다.
-3. NestJS Server를 실행시킵니다.
+
 ```
 
 ## API Docs - localhost:4010
