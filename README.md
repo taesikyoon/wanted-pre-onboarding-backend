@@ -1,73 +1,250 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# 주요 구성
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+1. NestJS
+1. TypeORM
+1. MySQL
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# 준비 사항
 
-## Description
+_실행환경은 MAC_OS입니다._
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+1. 데이터베이스 "wanted-pre-onboarding-backend"를 미리 생성해주세요.
+1. 최상위 루트에 있는 .env.sample을 .local.env로 변경하고 환경변수를 채워주세요.
+1. start.sh을 실행시키면 모든 api를 이용할 환경이 구성됩니다.
 
-## Installation
+## 실행 방법
 
-```bash
-$ npm install
+### 서버 환경 구성 및 서버 실행
+
+- 셀 스크립트 실행
+
+```
+sh start.sh
 ```
 
-## Running the app
+- 쉘 실행 내용 요약
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
 ```
 
-## Support
+### 테스트 실행
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- 셀 스크립트 실행
 
-## Stay in touch
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```
 
-## License
+- 쉘 실행 내용 요약
 
-Nest is [MIT licensed](LICENSE).
+```
+1. 데이터베이스 테이블을 생성합니다.
+2. 각 테이블에 테스트를 위한 seed data를 삽입합니다.
+3. NestJS Server를 실행시킵니다.
+```
+
+## API Docs - localhost:4010
+
+### 1. 채용공고 생성
+
+- POST : /job-postings
+- Request Body
+  ```
+  {
+    "companyId":2,
+    "position":"백엔드 개발자 테스트",
+    "compensation":10000,
+    "technicalStack":"NestJS",
+    "description":"테스트"
+  }
+  ```
+- Response
+  ```
+  {
+    "success": true,
+    "message": "채용공고 등록에 성공하셨습니다.",
+    "data": {
+        "companyId": 2,
+        "position": "백엔드 개발자 테스트",
+        "compensation": 10000,
+        "technicalStack": "NestJS",
+        "description": "테스트",
+        "id": "30"
+    }
+  }
+  ```
+
+### 2. 채용공고 리스트 조회
+
+- GET : /job-postings?page=1&items=10&sort=DESC
+- Request Body
+  - 없음
+- Response
+  ```
+  {
+    "success": true,
+    "message": "채용공고 리스트를 조회했습니다.",
+    "data": [
+        {
+            "id": "20",
+            "position": "Vue 프론트 개발자",
+            "compensation": 100000000,
+            "technicalStack": "Vue",
+            "companyId": "5",
+            "companyName": "원티드코리아",
+            "country": "한국",
+            "region": "서울"
+        },
+        {
+            "id": "19",
+            "position": "백엔드 주니어 개발자",
+            "compensation": 150000000,
+            "technicalStack": "NestJS",
+            "companyId": "4",
+            "companyName": "원티드랩",
+            "country": "한국",
+            "region": "전주"
+        }, ... ]
+  }
+  ```
+
+### 3. 채용공고 수정
+
+- PATCH : /job-postings/:id
+- Request Body
+
+  ```
+  # id를 제외한 모든 부분 수정 가능( 부분 수정도 가능 )
+  {
+    "position": "Django 백엔드 개발자",
+    "compensation": 100000000,
+    "description": "장고 백엔드 개발자 환영합니다!",
+    "technicalStack": "Django",
+
+    OR
+
+    "technicalStack": "Python" // 입력함
+  }
+  ```
+
+- Response
+  ```
+  {
+    "success": true,
+    "message": "채용공고를 정상적으로 수정했습니다.",
+    "data": {
+        "id": "17",
+        "position": "Django 백엔드 개발자",
+        "compensation": 100000000,
+        "description": "장고 백엔드 개발자 환영합니다!",
+        "technicalStack": "Python", // 수정됨
+        "companyId": "2"
+        }
+    }
+  ```
+
+### 4. 채용공고 상세조회
+
+- GET : /job-postings/:id
+- Request Body
+
+  - 없음
+
+- Response
+  ```
+  {
+    "success": true,
+    "message": "채용공고 상세조회에 성공했습니다.",
+    "data": {
+        "id": "17",
+        "position": "Django 백엔드 개발자",
+        "compensation": 100000000,
+        "description": "장고 백엔드 개발자 환영합니다!",
+        "technicalStack": "Python",
+        "companyId": "2",
+        "otherJobPostings": ["2", "7", "12"]
+        }
+    }
+  ```
+
+### 5. 채용공고 삭제
+
+- DELETE : /job-postings/:id
+- Request Body
+  - 없음
+- Response
+  ```
+  {
+    "success": true,
+    "message": "채용공고를 정상적으로 삭제했습니다."
+  }
+  ```
+
+### 6. 채용공고 검색
+
+- POST : /job-postings/search?keyword=원티드
+- Request Body
+  - 없음
+- Response
+  ```
+  {
+    "success": true,
+    "message": "키워드로 채용공고 리스트를 조회했습니다.",
+    "data": [
+        {
+            "id": "1",
+            "position": "백엔드 주니어 개발자",
+            "compensation": 150000000,
+            "technicalStack": "NestJS",
+            "companyId": "1",
+            "companyName": "원티드",
+            "country": "한국",
+            "region": "대구"
+        },
+        {
+            "id": "4",
+            "position": "백엔드 주니어 개발자",
+            "compensation": 150000000,
+            "technicalStack": "NestJS",
+            "companyId": "4",
+            "companyName": "원티드랩",
+            "country": "한국",
+            "region": "전주"
+        },
+        {
+            "id": "5",
+            "position": "Vue 프론트 개발자",
+            "compensation": 100000000,
+            "technicalStack": "Vue",
+            "companyId": "5",
+            "companyName": "원티드코리아",
+            "country": "한국",
+            "region": "서울"
+        }, ... ]
+  }
+  ```
+
+### 7. 채용공고 지원
+
+- POST : /job-postings/:id/apply
+- Request Body
+  - 없음
+- Response
+
+  ```
+  {
+    "success": true,
+    "message": "채용공고에 지원에 성공했습니다.",
+    "data": {
+    "id": "3",
+    "userId": "1",
+    "jobPostingId": "5"
+    }
+  }
+  ```
+
+### 10월 7일 이후 추가할 내역 리스트
+
+1. 테스트 코드 작성
+1. docker를 이용한 실행환경 구축
