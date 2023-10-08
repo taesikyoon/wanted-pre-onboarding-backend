@@ -11,9 +11,6 @@ export class AppConfig {
   @IsOptional()
   APP_PORT: number;
 
-  @IsString()
-  API_PREFIX: string;
-
   @IsIn(['Asia/Seoul'])
   TZ: string;
 }
