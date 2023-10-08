@@ -1,8 +1,9 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ApplicationHistory } from './application-history.entity';
-import { BadRequestException, InternalServerErrorException } from '@nestjs/common';
+import { BadRequestException, Injectable, InternalServerErrorException } from '@nestjs/common';
 
+@Injectable()
 export class ApplicationHistoryDAO {
   constructor(
     @InjectRepository(ApplicationHistory) private readonly applicationHistoryRepository: Repository<ApplicationHistory>,

@@ -4,8 +4,9 @@ import { Repository, SelectQueryBuilder } from 'typeorm';
 import { CreateJobPostingDTO } from '../dto/request/create-job-posting.dto';
 import { FindManyJobPostingDTO } from '../dto/request/find-many-job-posting.dto';
 import { UpdateJobPostingDTO } from '../dto/request/update-job-posting.dto';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 
+@Injectable()
 export class JobPostingDAO {
   private readonly jobPostingsSelect: string[];
   constructor(@InjectRepository(JobPosting) private readonly jobPostingRepository: Repository<JobPosting>) {

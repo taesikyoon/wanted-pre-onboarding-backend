@@ -1,5 +1,5 @@
 import { Expose, Exclude } from 'class-transformer';
-import { Company } from 'src/company/models/company.entity';
+import { Company } from '../../../company/models/company.entity';
 
 export class JobPostingMapper {
   @Expose()
