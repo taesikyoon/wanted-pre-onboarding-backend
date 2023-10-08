@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsIn, IsInt, IsNumber } from 'class-validator';
+import { IsIn, IsInt } from 'class-validator';
 
 export class FindManyJobPostingDTO {
   @IsInt()

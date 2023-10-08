@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv';
 
 export const PROJECT_SRC_ROOT = `${__dirname}/../..`;
 
-dotenv.config({ path: `${PROJECT_SRC_ROOT}/database/configs/.env` });
+dotenv.config({ path: `${PROJECT_SRC_ROOT}/../.local.env` });
 
 export const ormConfig: DataSourceOptions = {
   type: 'mysql',

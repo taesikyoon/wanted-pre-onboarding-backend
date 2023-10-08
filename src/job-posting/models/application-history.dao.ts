@@ -23,7 +23,7 @@ export class ApplicationHistoryDAO {
         .insert()
         .values({ jobPostingId, userId })
         .execute();
-      return history.identifiers;
+      return history.identifiers[0];
     } catch (err) {
       if (err.sqlState !== '23000') {
         throw new InternalServerErrorException('알 수 없는 데이터 베이스 에러');
